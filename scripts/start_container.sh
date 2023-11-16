@@ -8,4 +8,4 @@ aws ecr-public get-login-password --region us-east-1 | docker login --username A
 docker pull public.ecr.aws/c3x0j4u6/naveen_ers:latest
 
 # Run the Docker image as a containers
-run -d -p 5000:5000  public.ecr.aws/c3x0j4u6/naveen_ers:latest
+docker run -d -p 5000:5000  public.ecr.aws/c3x0j4u6/naveen_ers:latest

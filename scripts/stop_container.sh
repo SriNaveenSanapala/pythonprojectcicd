@@ -1,20 +1,16 @@
 #!/bin/bash
-set -e
+##
 
-# Find the ID of the running container by filtering it based on your application image
-CONTAINER_ID=$(sudo docker ps -q --filter ancestor=public.ecr.aws/c3x0j4u6/naveen_ers:latest)
+# Get the IDs of running containers publishing port 8000
+running_containers=$(sudo docker ps -q --filter "publish=8000")
 
-# Print the container ID for debugging
-echo "Container ID: $CONTAINER_ID"
+# Output the IDs
+echo "Containers to stop:"
+echo "$running_containers"
 
-# Check if the container is running
-if [ -n "$CONTAINER_ID" ]; then
-    # Stop the running container
-    echo "Stopping container..."
-    sudo docker stop "$CONTAINER_ID"
-    
-    # Additional debugging information (optional)
-    echo "Stopped container with ID: $CONTAINER_ID"
-else
-    echo "No running container found for the specified image."
-fi
+# Stop each container
+while IFS= read -r container_id; do
+    echo "Stopping container $container_id..."
+    sudo docker stop "$container_id"
+done <<< "$running_containers"
+

@@ -1,6 +1,13 @@
 version: 0.0
 os: linux
 
+files:
+  - source: scripts/start_container.sh
+    destination: scripts/start_container.sh
+  - source: scripts/skip_stop_container.sh
+    destination: scripts/skip_stop_container.sh
+  # Add other necessary files, if any
+
 hooks:
   AfterInstall:
     - location: scripts/start_container.sh

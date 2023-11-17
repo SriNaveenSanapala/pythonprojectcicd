@@ -2,19 +2,22 @@ version: 0.0
 os: linux
 
 files:
-  - source: scripts/start_container.sh
-    destination: scripts/start_container.sh
-  - source: scripts/skip_stop_container.sh
-    destination: scripts/skip_stop_container.sh
-  - source: scripts/stop_container.sh
-    destination: scripts/stop_container.sh
+  - source: scripts
+    destination: /path/to/scripts
 
 hooks:
+  BeforeInstall:
+    - location: scripts/change_permissions.sh
+      timeout: 300
+      runas: root
+
   AfterInstall:
     - location: scripts/start_container.sh
       timeout: 300
       runas: root
+
   ApplicationStop:
     - location: scripts/stop_container.sh
-      timeout: 5
+      timeout: 300
       runas: root
+

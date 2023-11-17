@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+#set -e
 
 # Get the ID of the running container
 #CONTAINER_ID=$(docker ps -q --filter ancestor=public.ecr.aws/c3x0j4u6/naveen_ers:latest)

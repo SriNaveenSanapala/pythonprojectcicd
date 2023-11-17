@@ -3,7 +3,6 @@ os: linux
 
 files:
   - source: scripts
-    destination: scripts
 
 hooks:
   BeforeInstall:

@@ -19,3 +19,17 @@ docker pull public.ecr.aws/c3x0j4u6/naveen_ers:latest
 # Run the Docker image as a container
 docker run -d -p 5000:5000 public.ecr.aws/c3x0j4u6/naveen_ers:latest
 
+# Additional debugging information (optional)
+echo "AWS CLI path: $AWS_PATH"
+echo "Docker images:"
+docker images
+
+# Ensure that the container is running
+CONTAINER_ID=$(docker ps -q --filter ancestor=public.ecr.aws/c3x0j4u6/naveen_ers:latest)
+if [ -z "$CONTAINER_ID" ]; then
+  echo "Error: Container is not running."
+  exit 1
+fi
+
+# Print container information (optional)
+echo "Container is running with ID: $CONTAINER_ID"

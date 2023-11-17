@@ -1,14 +1,21 @@
 #!/bin/bash
 set -e
 
-# Use the full path to the aws executable or include it in the PATH
-export PATH=$PATH:/usr/local/bin
+# Set the path to the aws executable
+AWS_PATH=$(command -v aws)
+
+# Check if aws command exists
+if [ -z "$AWS_PATH" ]; then
+  echo "Error: aws command not found."
+  exit 1
+fi
 
 # Authenticate Docker with ECR
-/usr/local/bin/aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/c3x0j4u6
+$AWS_PATH ecr-public get-login-password --region us-east-1 --no-include-email | docker login --username AWS --password-stdin public.ecr.aws/c3x0j4u6
 
 # Pull the Docker image from ECR
 docker pull public.ecr.aws/c3x0j4u6/naveen_ers:latest
 
 # Run the Docker image as a container
 docker run -d -p 5000:5000 public.ecr.aws/c3x0j4u6/naveen_ers:latest
+

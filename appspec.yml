@@ -6,7 +6,8 @@ files:
     destination: scripts/start_container.sh
   - source: scripts/skip_stop_container.sh
     destination: scripts/skip_stop_container.sh
-  # Add other necessary files, if any
+  - source: scripts/stop_container.sh
+    destination: scripts/stop_container.sh
 
 hooks:
   AfterInstall:
@@ -14,6 +15,6 @@ hooks:
       timeout: 300
       runas: root
   ApplicationStop:
-    - location: scripts/skip_stop_container.sh
+    - location: scripts/stop_container.sh
       timeout: 5
       runas: root

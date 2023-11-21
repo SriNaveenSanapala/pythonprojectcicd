@@ -8,6 +8,7 @@ db_config = {
     'host': 'database-1.ckqw7qg66yzq.ap-south-1.rds.amazonaws.com',
     'user': 'admin',
     'password': 'SSnaveen68rds',
+    'database': 'naveen'
 }
 
 # Create a 'guestbook' table in MySQL with columns 'id', 'name', 'message', and 'timestamp'

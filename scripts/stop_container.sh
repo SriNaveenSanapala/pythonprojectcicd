@@ -1,16 +1,18 @@
 #!/bin/bash
-##
 
-# Get the IDs of running containers publishing port 8000
-running_containers=$(sudo docker ps -q --filter "publish=8000")
+# Get the ID of the running container
+CONTAINER_ID=$(docker ps -q --filter "publish=8000")
 
-# Output the IDs
-echo "Containers to stop:"
-echo "$running_containers"
-
-# Stop each container
-while IFS= read -r container_id; do
-    echo "Stopping container $container_id..."
-    sudo docker stop "$container_id"
-done <<< "$running_containers"
-
+# Check if the container is running
+if [ -n "$CONTAINER_ID" ]; then
+    # Print the container ID for debugging
+    echo "Container ID: $CONTAINER_ID"
+    
+    # Stop the running container
+    docker stop "$CONTAINER_ID"
+    
+    # Additional debugging information (optional)
+    echo "Stopped container with ID: $CONTAINER_ID"
+else
+    echo "No running container found for the specified image."
+fi
